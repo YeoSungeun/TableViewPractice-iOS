@@ -8,82 +8,67 @@
 import UIKit
 
 class SettingTableViewController: UITableViewController {
+    
+    var allSettingList = ["공지사항", "실험실", "버전 정보"]
+    var personalSettingList = ["개인/보안", "알림", "채팅", "멀티프로필"]
+    var etcList = ["고객센터/도움말"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.title = "설정"
+  
     }
 
-    // MARK: - Table view data source
-
+    // 섹션의 개수
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 3
     }
-
+    
+    // 섹션 타이틀 지정
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "전체 설정"
+        } else if section == 1 {
+            return "개인 설정"
+        } else if section == 2 {
+            return "기타"
+        }
+        
+        return ""
+    }
+    
+    // 섹션 별 셀 개수
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        
+        if section == 0 {
+            return allSettingList.count
+        } else if section == 1 {
+            return personalSettingList.count
+        } else if section == 2 {
+            return etcList.count
+        }
+        
         return 0
     }
-
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "settingCell")!
+        
+        // 데이터 담아주기
+        if indexPath.section == 0 {
+            cell.textLabel?.text = allSettingList[indexPath.row]
+        } else if indexPath.section == 1 {
+            cell.textLabel?.text = personalSettingList[indexPath.row]
+        } else if indexPath.section == 2 {
+            cell.textLabel?.text = etcList[indexPath.row]
+        }
+        
+        // 디자인 설정
+        cell.textLabel?.font = .systemFont(ofSize: 14)
+        
         return cell
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }
